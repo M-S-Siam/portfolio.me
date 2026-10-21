@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Md. Shahariar Siam — Digital Marketing Specialist & Creative Producer</title>
+    <meta name="description" content="Digital Marketing Specialist with 2+ years experience in Meta & Google Ads, viral social media growth (15× in 2 months), and in-house cinematography." />
+    <meta property="og:title" content="Md. Shahariar Siam — Digital Marketing Specialist & Creative Producer" />
+    <meta property="og:description" content="Performance Marketing, Social Media Growth, and In-House Cinematography for lifestyle & restaurant brands." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      // Defensive handling for browser extensions attempting to monkey-patch window.fetch
+      (function() {
+        try {
+          var _nativeFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var _currentFetch = _nativeFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _currentFetch;
+            },
+            set: function(fn) {
+              _currentFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+
+        // Suppress unhandled errors injected by third-party browser extensions
+        window.addEventListener('error', function(event) {
+          if (event && (
+            (event.filename && event.filename.indexOf('chrome-extension://') !== -1) ||
+            (event.message && event.message.indexOf('chrome-extension://') !== -1) ||
+            (event.error && event.error.stack && event.error.stack.indexOf('chrome-extension://') !== -1)
+          )) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event && event.reason && (
+            (event.reason.stack && event.reason.stack.indexOf('chrome-extension://') !== -1) ||
+            (event.reason.message && event.reason.message.indexOf('chrome-extension://') !== -1)
+          )) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body class="bg-[#F7F7F6] text-[#151515] font-sans antialiased selection:bg-zinc-900 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

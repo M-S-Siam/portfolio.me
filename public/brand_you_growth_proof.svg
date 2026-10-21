@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#090D16" />
+    </linearGradient>
+
+    <!-- Chart Area Gradient -->
+    <linearGradient id="chartAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.38" />
+      <stop offset="40%" stop-color="#10B981" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.0" />
+    </linearGradient>
+
+    <!-- Chart Line Stroke Gradient -->
+    <linearGradient id="chartLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="45%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#34D399" />
+    </linearGradient>
+
+    <!-- Card Background Gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Meta Blue Gradient -->
+    <linearGradient id="metaBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0064E0" />
+      <stop offset="100%" stop-color="#0080FF" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="750" fill="url(#bgGrad)" />
+
+  <!-- Subtle Blueprint Grid Pattern -->
+  <g opacity="0.07" stroke="#94A3B8" stroke-width="1">
+    <line x1="0" y1="125" x2="1200" y2="125" />
+    <line x1="0" y1="250" x2="1200" y2="250" />
+    <line x1="0" y1="375" x2="1200" y2="375" />
+    <line x1="0" y1="500" x2="1200" y2="500" />
+    <line x1="0" y1="625" x2="1200" y2="625" />
+    <line x1="200" y1="0" x2="200" y2="750" />
+    <line x1="400" y1="0" x2="400" y2="750" />
+    <line x1="600" y1="0" x2="600" y2="750" />
+    <line x1="800" y1="0" x2="800" y2="750" />
+    <line x1="1000" y1="0" x2="1000" y2="750" />
+  </g>
+
+  <!-- Main Container Card -->
+  <rect x="40" y="35" width="1120" height="680" rx="24" fill="#0B1120" stroke="#334155" stroke-width="1.5" filter="url(#cardShadow)" />
+
+  <!-- Top Navigation / Header of Meta Business Suite -->
+  <g transform="translate(75, 65)">
+    <!-- Brand Avatar & Meta Icon -->
+    <rect x="0" y="0" width="54" height="54" rx="27" fill="url(#metaBlue)" />
+    <!-- Stylized Meta / Infinity M mark -->
+    <path d="M16 32 C13 32 11 29 11 26 C11 22 14 18 18 18 C22 18 25 24 27 27 C29 24 32 18 36 18 C40 18 43 22 43 26 C43 29 41 32 38 32 C35 32 32 29 30 26 C28 23 27 22 27 22 C27 22 26 23 24 26 C22 29 19 32 16 32 Z" fill="#FFFFFF" fill-rule="evenodd" />
+
+    <text x="70" y="24" fill="#F8FAFC" font-size="20" font-weight="700" class="font-sans">Brand You — Official</text>
+    <text x="70" y="44" fill="#94A3B8" font-size="13" font-weight="500" class="font-sans">Professional Dashboard • Meta Insights &amp; Growth Performance</text>
+
+    <!-- Verified Badge -->
+    <circle cx="282" cy="18" r="9" fill="#1877F2" />
+    <path d="M278 18 L281 21 L286 15" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+    <!-- Date Range Pill -->
+    <g transform="translate(740, 6)">
+      <rect x="0" y="0" width="230" height="38" rx="19" fill="#1E293B" stroke="#475569" stroke-width="1" />
+      <circle cx="22" cy="19" r="4" fill="#10B981" />
+      <text x="36" y="24" fill="#E2E8F0" font-size="13" font-weight="600" class="font-sans">Last 60 Days: May 1 – Jun 30</text>
+    </g>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="75" y1="135" x2="1125" y2="135" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Metric Cards Row (3 Cards) -->
+  <g transform="translate(75, 155)">
+    <!-- Card 1: Followers (Highlighted) -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="330" height="115" rx="16" fill="url(#cardGrad)" stroke="#10B981" stroke-width="1.5" />
+      <text x="20" y="32" fill="#94A3B8" font-size="13" font-weight="600" letter-spacing="0.5" class="font-sans">TOTAL FOLLOWERS</text>
+      
+      <!-- Follower Numbers -->
+      <text x="20" y="72" fill="#FFFFFF" font-size="34" font-weight="800" class="font-sans">6,042</text>
+      <text x="125" y="70" fill="#64748B" font-size="16" font-weight="500" class="font-sans">from 400</text>
+
+      <!-- Badge Pill -->
+      <rect x="20" y="85" width="168" height="22" rx="11" fill="#064E3B" fill-opacity="0.6" />
+      <text x="28" y="100" fill="#34D399" font-size="12" font-weight="700" class="font-sans">▲ 15.1× Growth (+1,410%)</text>
+    </g>
+
+    <!-- Card 2: Total Reach -->
+    <g transform="translate(355, 0)">
+      <rect x="0" y="0" width="330" height="115" rx="16" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+      <text x="20" y="32" fill="#94A3B8" font-size="13" font-weight="600" letter-spacing="0.5" class="font-sans">ACCOUNTS REACHED</text>
+      <text x="20" y="72" fill="#FFFFFF" font-size="34" font-weight="800" class="font-sans">284.6K</text>
+      <rect x="20" y="85" width="138" height="22" rx="11" fill="#064E3B" fill-opacity="0.6" />
+      <text x="28" y="100" fill="#34D399" font-size="12" font-weight="700" class="font-sans">▲ +840% vs previous</text>
+    </g>
+
+    <!-- Card 3: Video Plays & Viral Content -->
+    <g transform="translate(710, 0)">
+      <rect x="0" y="0" width="340" height="115" rx="16" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+      <text x="20" y="32" fill="#94A3B8" font-size="13" font-weight="600" letter-spacing="0.5" class="font-sans">TOP REEL / VIDEO PLAYS</text>
+      <text x="20" y="72" fill="#FFFFFF" font-size="34" font-weight="800" class="font-sans">24,850</text>
+      <rect x="20" y="85" width="158" height="22" rx="11" fill="#064E3B" fill-opacity="0.6" />
+      <text x="28" y="100" fill="#34D399" font-size="12" font-weight="700" class="font-sans">▲ Viral Hook (In-House)</text>
+    </g>
+  </g>
+
+  <!-- Interactive Chart Area -->
+  <g transform="translate(75, 305)">
+    <!-- Chart Header -->
+    <text x="5" y="20" fill="#F8FAFC" font-size="17" font-weight="700" class="font-sans">Follower Growth Trajectory (60-Day Scaling Campaign)</text>
+    <text x="5" y="40" fill="#94A3B8" font-size="13" font-weight="500" class="font-sans">Paid Meta Ads distribution paired with high-retention short-form video hooks</text>
+
+    <!-- Legend -->
+    <g transform="translate(860, 10)">
+      <circle cx="10" cy="10" r="5" fill="#10B981" />
+      <text x="22" y="14" fill="#CBD5E1" font-size="13" font-weight="600" class="font-sans">Net Followers</text>
+      <circle cx="130" cy="10" r="5" fill="#38BDF8" opacity="0.6" />
+      <text x="142" y="14" fill="#94A3B8" font-size="13" font-weight="500" class="font-sans">Paid Ad Lift</text>
+    </g>
+
+    <!-- Grid Horizontal Lines & Y-Axis Labels -->
+    <g transform="translate(0, 60)">
+      <!-- 6,000 Level -->
+      <line x1="50" y1="20" x2="1050" y2="20" stroke="#334155" stroke-dasharray="4,4" stroke-width="1" />
+      <text x="0" y="24" fill="#64748B" font-size="12" font-weight="600" class="font-sans">6.0K</text>
+
+      <!-- 4,500 Level -->
+      <line x1="50" y1="75" x2="1050" y2="75" stroke="#334155" stroke-dasharray="4,4" stroke-width="1" />
+      <text x="0" y="79" fill="#64748B" font-size="12" font-weight="600" class="font-sans">4.5K</text>
+
+      <!-- 3,000 Level -->
+      <line x1="50" y1="130" x2="1050" y2="130" stroke="#334155" stroke-dasharray="4,4" stroke-width="1" />
+      <text x="0" y="134" fill="#64748B" font-size="12" font-weight="600" class="font-sans">3.0K</text>
+
+      <!-- 1,500 Level -->
+      <line x1="50" y1="185" x2="1050" y2="185" stroke="#334155" stroke-dasharray="4,4" stroke-width="1" />
+      <text x="0" y="189" fill="#64748B" font-size="12" font-weight="600" class="font-sans">1.5K</text>
+
+      <!-- 400 (Baseline) Level -->
+      <line x1="50" y1="230" x2="1050" y2="230" stroke="#475569" stroke-width="1.5" />
+      <text x="12" y="234" fill="#94A3B8" font-size="12" font-weight="700" class="font-sans">400</text>
+
+      <!-- Area Gradient Path (From 400 to 6,042) -->
+      <!-- Start: x=50, y=230 (Day 1: 400) -->
+      <!-- Point 2: x=250, y=215 (Day 15: 750) -->
+      <!-- Point 3: x=450, y=180 (Day 30: 1,650) -->
+      <!-- Point 4: x=650, y=120 (Day 42: 3,200) - Viral spike inflection -->
+      <!-- Point 5: x=850, y=60 (Day 52: 4,850) -->
+      <!-- End: x=1020, y=20 (Day 60: 6,042) -->
+      <path d="M 50 230 
+               C 180 230, 250 215, 380 195 
+               C 500 175, 600 135, 720 95 
+               C 830 58, 930 25, 1020 20
+               L 1020 230 L 50 230 Z" 
+            fill="url(#chartAreaGrad)" />
+
+      <!-- Curved Stroke Line -->
+      <path d="M 50 230 
+               C 180 230, 250 215, 380 195 
+               C 500 175, 600 135, 720 95 
+               C 830 58, 930 25, 1020 20" 
+            fill="none" stroke="url(#chartLineGrad)" stroke-width="4.5" stroke-linecap="round" />
+
+      <!-- Data Point 1 (Start - 400) -->
+      <circle cx="50" cy="230" r="6" fill="#0F172A" stroke="#06B6D4" stroke-width="3" />
+      
+      <!-- Data Point: Inflection (Viral Hook + Ad Scale) -->
+      <circle cx="720" cy="95" r="5" fill="#0F172A" stroke="#10B981" stroke-width="3" />
+      <rect x="650" y="58" width="140" height="26" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+      <text x="660" y="75" fill="#E2E8F0" font-size="11" font-weight="600" class="font-sans">Viral Reel Released</text>
+
+      <!-- Data Point End (6,042) -->
+      <circle cx="1020" cy="20" r="7" fill="#10B981" stroke="#FFFFFF" stroke-width="3" filter="url(#glow)" />
+
+      <!-- Pin Callout Box at Peak (6,042) -->
+      <g transform="translate(860, -38)">
+        <rect x="0" y="0" width="180" height="48" rx="10" fill="#1E293B" stroke="#10B981" stroke-width="1.5" filter="url(#cardShadow)" />
+        <text x="12" y="20" fill="#34D399" font-size="12" font-weight="700" class="font-sans">6,042 FOLLOWERS</text>
+        <text x="12" y="38" fill="#F8FAFC" font-size="12" font-weight="500" class="font-sans">Day 60 Target Achieved</text>
+      </g>
+
+      <!-- X-Axis Labels (Time Intervals) -->
+      <text x="45" y="260" fill="#94A3B8" font-size="12" font-weight="600" class="font-sans">Day 01 (May 1)</text>
+      <text x="270" y="260" fill="#64748B" font-size="12" font-weight="500" class="font-sans">Day 15</text>
+      <text x="500" y="260" fill="#64748B" font-size="12" font-weight="500" class="font-sans">Day 30</text>
+      <text x="730" y="260" fill="#64748B" font-size="12" font-weight="500" class="font-sans">Day 45</text>
+      <text x="960" y="260" fill="#34D399" font-size="12" font-weight="700" class="font-sans">Day 60 (Jun 30)</text>
+    </g>
+  </g>
+
+  <!-- Bottom Proof Footer Bar -->
+  <g transform="translate(75, 650)">
+    <rect x="0" y="0" width="1050" height="42" rx="10" fill="#111827" stroke="#1E293B" stroke-width="1" />
+    <circle cx="20" cy="21" r="5" fill="#10B981" />
+    <text x="35" y="26" fill="#E2E8F0" font-size="12" font-weight="600" class="font-sans">Verified Campaign Metrics:</text>
+    <text x="200" y="26" fill="#94A3B8" font-size="12" font-weight="500" class="font-sans">Meta Ads Manager • Budget Optimization • 20+ Precision Campaigns • In-House Video Production</text>
+    <text x="930" y="26" fill="#10B981" font-size="12" font-weight="700" class="font-sans">15× Surge</text>
+  </g>
+</svg>

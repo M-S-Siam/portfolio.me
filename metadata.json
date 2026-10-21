@@ -1,0 +1,8 @@
+{
+  "name": "Remix Sevora — Minimalist Creative Portfolio",
+  "description": "A premium, minimalist creative portfolio for refined brand, digital, and interface design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
