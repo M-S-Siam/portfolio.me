@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
 import { Project, ProjectCategory } from '../types/portfolio';
 import { projects } from '../data/portfolioData';
+import { getAssetUrl } from '../utils/assetUrl';
 
 interface SelectedProjectsProps {
   onSelectProject: (project: Project) => void;
@@ -151,7 +152,7 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
                 {/* Image Container with Restrained Zoom */}
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#ECEEEF] border border-zinc-200/90 mb-5 shadow-2xs group-hover:shadow-md transition-shadow duration-300">
                   <motion.img
-                    src={project.image}
+                    src={getAssetUrl(project.image)}
                     alt={project.title}
                     className="w-full h-full object-cover contrast-[1.02] group-hover:scale-106 transition-transform duration-600 ease-out"
                     loading="lazy"

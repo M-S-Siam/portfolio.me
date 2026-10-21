@@ -3,6 +3,7 @@ import { ArrowUpRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { articles } from '../data/portfolioData';
 import { Article } from '../types/portfolio';
+import { getAssetUrl } from '../utils/assetUrl';
 
 export const ArticlesSection: React.FC = () => {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -53,7 +54,7 @@ export const ArticlesSection: React.FC = () => {
               <div>
                 <div className="aspect-[16/10] rounded-xl overflow-hidden bg-zinc-950 mb-5 border border-zinc-200/90 shadow-2xs">
                   <img
-                    src={article.image}
+                    src={getAssetUrl(article.image)}
                     alt={article.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600 ease-out"
@@ -132,7 +133,7 @@ export const ArticlesSection: React.FC = () => {
               {selectedArticle.image && (
                 <div className="rounded-xl overflow-hidden mb-6 border border-zinc-200/90 bg-zinc-950 shadow-sm">
                   <img
-                    src={selectedArticle.image}
+                    src={getAssetUrl(selectedArticle.image)}
                     alt={selectedArticle.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-auto object-cover max-h-[380px]"

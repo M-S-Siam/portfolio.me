@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { X, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types/portfolio';
+import { getAssetUrl } from '../utils/assetUrl';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -83,7 +84,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
               {/* Featured Hero Media */}
               <div className="rounded-2xl overflow-hidden border border-zinc-200/80 mb-8 bg-zinc-100">
                 <img
-                  src={project.image}
+                  src={getAssetUrl(project.image)}
                   alt={project.title}
                   className="w-full h-[320px] sm:h-[420px] object-cover contrast-[1.02]"
                 />
@@ -149,7 +150,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
                     {project.gallery.slice(1).map((img, idx) => (
                       <div key={idx} className="rounded-xl overflow-hidden border border-zinc-200">
                         <img
-                          src={img}
+                          src={getAssetUrl(img)}
                           alt={`${project.title} detail ${idx + 1}`}
                           className="w-full h-52 object-cover contrast-[1.02] hover:scale-105 transition-transform duration-500"
                         />

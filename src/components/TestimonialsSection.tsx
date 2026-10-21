@@ -1,5 +1,6 @@
 import React from 'react';
 import { testimonials } from '../data/portfolioData';
+import { getAssetUrl } from '../utils/assetUrl';
 
 export const TestimonialsSection: React.FC = () => {
   return (
@@ -34,7 +35,7 @@ export const TestimonialsSection: React.FC = () => {
 
               <div className="flex items-center gap-3.5 pt-4 border-t border-zinc-100">
                 <img
-                  src={item.avatar}
+                  src={getAssetUrl(item.avatar)}
                   alt={item.author}
                   className="w-10 h-10 rounded-full object-cover grayscale contrast-125 border border-zinc-200"
                 />

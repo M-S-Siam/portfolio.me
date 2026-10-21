@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { heroStats, portfolioConfig } from '../data/portfolioData';
 import { AnimatedCounter } from './AnimatedCounter';
+import { getAssetUrl } from '../utils/assetUrl';
 
 interface HeroProps {
   onSelectProjectClick: () => void;
@@ -154,7 +155,7 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                 className="w-full h-full flex items-end justify-center overflow-hidden"
               >
                 <img
-                  src={portraitSrc}
+                  src={getAssetUrl(portraitSrc)}
                   onError={handleImageError}
                   referrerPolicy="no-referrer"
                   alt={`${portfolioConfig.fullName} — Digital Marketing Specialist & Cinematographer`}
