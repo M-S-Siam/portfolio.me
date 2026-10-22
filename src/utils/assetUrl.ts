@@ -1,9 +1,12 @@
 /**
- * Resolves an asset URL so it works seamlessly both locally and on GitHub Pages
- * under repository subpaths (e.g. /portfolio.me/).
+ * Resolves public asset URLs cleanly across AI Studio preview,
+ * local Vite development, custom domains, and GitHub Pages subpaths
+ * (e.g., https://m-s-siam.github.io/portfolio.me/).
  */
-export function getAssetUrl(path: string | undefined | null): string {
-  if (!path) return '';
+export function getAssetUrl(path: string): string {
+  if (!path) return path;
+
+  // Leave external URLs, data URIs, and blob URLs untouched
   if (
     path.startsWith('http://') ||
     path.startsWith('https://') ||
@@ -13,12 +16,11 @@ export function getAssetUrl(path: string | undefined | null): string {
     return path;
   }
 
-  // Strip leading slash if any
+  const baseUrl = import.meta.env.BASE_URL || '/';
+
+  // Normalize leading slash so we don't duplicate slashes or break relative base URLs
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  
-  // import.meta.env.BASE_URL is set by Vite (e.g. '/portfolio.me/' or './' or '/')
-  const base = import.meta.env.BASE_URL || './';
-  const prefix = base.endsWith('/') ? base : `${base}/`;
-  
-  return `${prefix}${cleanPath}`;
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+
+  return `${normalizedBase}${cleanPath}`;
 }

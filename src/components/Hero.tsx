@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowUpRight, Camera, Check, Upload } from 'lucide-react';
 import { motion } from 'motion/react';
 import { heroStats, portfolioConfig } from '../data/portfolioData';
 import { AnimatedCounter } from './AnimatedCounter';
@@ -9,29 +9,144 @@ interface HeroProps {
   onSelectProjectClick: () => void;
 }
 
-const DEFAULT_PORTRAIT = '/github_portrait.jpg';
-const STORAGE_KEY = 'siam_hero_portrait_v2';
+// Automatically detect if AI Studio synced file_00000000f58c8208810a0e1f538275d9 into public/assets/aistudio/
+const syncedSuitAssets = import.meta.glob(
+  '/public/assets/aistudio/file_00000000f58c8208810a0e1f538275d9*',
+  { eager: true, query: '?url', import: 'default' }
+) as Record<string, string>;
+
+const syncedSuitAssetUrl = Object.values(syncedSuitAssets)[0]
+  ? Object.values(syncedSuitAssets)[0].replace(/^\/public/, '')
+  : null;
+
+const DEFAULT_PORTRAIT = syncedSuitAssetUrl || '/suit_portrait.jpg';
+const STORAGE_KEY = 'siam_suit_portrait_v3';
+const LEGACY_KEYS = ['siam_hero_portrait_v2', 'siam_hero_portrait'];
+
+function getInitialSuitPortrait(): string {
+  if (typeof window !== 'undefined') {
+    // Purge any stale reference to the removed github_portrait.jpg
+    for (const key of [STORAGE_KEY, ...LEGACY_KEYS]) {
+      const val = localStorage.getItem(key);
+      if (val && val.includes('github_portrait')) {
+        localStorage.removeItem(key);
+      }
+    }
+
+    // Check if the user's suit image is already saved in localStorage from earlier
+    for (const key of [STORAGE_KEY, ...LEGACY_KEYS]) {
+      const saved = localStorage.getItem(key);
+      if (saved && saved.startsWith('data:image/')) {
+        return saved;
+      }
+    }
+  }
+  return getAssetUrl(DEFAULT_PORTRAIT);
+}
+
+async function persistPortraitToServer(dataUrl: string): Promise<boolean> {
+  if (!dataUrl.startsWith('data:image/')) return false;
+  try {
+    const res = await fetch('/api/save-portrait', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dataUrl }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
 
 export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
-  const [portraitSrc, setPortraitSrc] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('siam_hero_portrait');
-      if (saved) return saved;
-    }
-    return DEFAULT_PORTRAIT;
-  });
+  const [portraitSrc, setPortraitSrc] = useState<string>(getInitialSuitPortrait);
+  const [imageMissingOnDisk, setImageMissingOnDisk] = useState<boolean>(false);
+  const [syncedToRepo, setSyncedToRepo] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('siam_hero_portrait');
-    if (saved) {
+    const saved = getInitialSuitPortrait();
+    if (saved.startsWith('data:image/')) {
       setPortraitSrc(saved);
+      localStorage.setItem(STORAGE_KEY, saved);
+      // Automatically write the suit image from browser storage to public/suit_portrait.jpg
+      // so it is permanently committed to GitHub!
+      persistPortraitToServer(saved).then((ok) => {
+        if (ok) {
+          setSyncedToRepo(true);
+          setImageMissingOnDisk(false);
+        }
+      });
+    } else {
+      // Check if public/suit_portrait.jpg exists on server disk
+      fetch('/api/portrait-status')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (data && data.exists === false && !syncedSuitAssetUrl) {
+            setImageMissingOnDisk(true);
+          }
+        })
+        .catch(() => {
+          // Static hosting (e.g., GitHub Pages) won't have /api/portrait-status; rely on onError
+        });
     }
   }, []);
 
   const handleImageError = () => {
-    if (portraitSrc !== DEFAULT_PORTRAIT) {
-      setPortraitSrc(DEFAULT_PORTRAIT);
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && saved.startsWith('data:image/') && portraitSrc !== saved) {
+      setPortraitSrc(saved);
+    } else {
+      setImageMissingOnDisk(true);
     }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = async () => {
+        // Compress & normalize to high-quality JPEG so it loads fast and commits cleanly to GitHub
+        const canvas = document.createElement('canvas');
+        const maxDim = 1600;
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+          setPortraitSrc(dataUrl);
+          setImageMissingOnDisk(false);
+          try {
+            localStorage.setItem(STORAGE_KEY, dataUrl);
+            for (const legacyKey of LEGACY_KEYS) {
+              localStorage.setItem(legacyKey, dataUrl);
+            }
+          } catch {
+            // Ignore localStorage quota errors
+          }
+          const savedToDisk = await persistPortraitToServer(dataUrl);
+          if (savedToDisk) {
+            setSyncedToRepo(true);
+          }
+        }
+      };
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -142,7 +257,41 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
             </div>
 
             {/* Right Column: Editorial Portrait & Floating Availability Card */}
-            <div className="lg:col-span-5 relative flex items-end justify-center overflow-hidden min-h-[440px] lg:min-h-[620px]">
+            <div className="lg:col-span-5 relative flex items-end justify-center overflow-hidden min-h-[440px] lg:min-h-[620px] group/portrait">
+              {/* Hidden File Input to save suit portrait directly to public/suit_portrait.jpg */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+
+              {/* Subtle top-right button to update/sync suit portrait to GitHub repo */}
+              {typeof window !== 'undefined' &&
+                (window.location.hostname === 'localhost' ||
+                  window.location.hostname.includes('run.app') ||
+                  window.location.hostname.includes('aistudio')) && (
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    title="Select your suit portrait to save permanently to public/suit_portrait.jpg for GitHub"
+                    className="absolute top-4 right-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/75 hover:bg-zinc-900 text-white text-xs font-medium backdrop-blur-md border border-white/15 shadow-sm opacity-0 group-hover/portrait:opacity-100 focus:opacity-100 transition-opacity cursor-pointer"
+                  >
+                    {syncedToRepo ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Saved for GitHub</span>
+                      </>
+                    ) : (
+                      <>
+                        <Camera className="w-3.5 h-3.5" />
+                        <span>Change Portrait</span>
+                      </>
+                    )}
+                  </button>
+                )}
+
               {/* Studio Backdrop subtle gradient blend */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#ECEDEF] via-transparent to-transparent lg:hidden z-1 pointer-events-none" />
 
@@ -154,14 +303,32 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                 transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                 className="w-full h-full flex items-end justify-center overflow-hidden"
               >
-                <img
-                  src={getAssetUrl(portraitSrc)}
-                  onError={handleImageError}
-                  referrerPolicy="no-referrer"
-                  alt={`${portfolioConfig.fullName} — Digital Marketing Specialist & Cinematographer`}
-                  className="w-full h-full min-h-[440px] lg:min-h-[620px] object-cover object-top select-none pointer-events-none transition-all duration-700 ease-out hover:scale-[1.02] contrast-[1.03] brightness-[1.01]"
-                  loading="eager"
-                />
+                {imageMissingOnDisk ? (
+                  <div
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full h-full min-h-[440px] lg:min-h-[620px] flex flex-col items-center justify-center p-8 text-center bg-gradient-to-b from-[#E4E5E9] to-[#D8DADF] cursor-pointer hover:from-[#DFE0E5] transition-colors"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-zinc-900 text-white flex items-center justify-center shadow-md mb-4">
+                      <Upload className="w-6 h-6" />
+                    </div>
+                    <p className="text-zinc-900 font-semibold text-base mb-1">
+                      Click to set your Suit Portrait
+                    </p>
+                    <p className="text-zinc-600 text-xs max-w-[260px] leading-relaxed">
+                      Select your navy suit photo once — it will automatically save to{' '}
+                      <code className="text-zinc-800 font-mono">public/suit_portrait.jpg</code> for both AI Studio and GitHub.
+                    </p>
+                  </div>
+                ) : (
+                  <img
+                    src={portraitSrc}
+                    onError={handleImageError}
+                    referrerPolicy="no-referrer"
+                    alt={`${portfolioConfig.fullName} — Digital Marketing Specialist & Cinematographer`}
+                    className="w-full h-full min-h-[440px] lg:min-h-[620px] object-cover object-top select-none pointer-events-none transition-all duration-700 ease-out hover:scale-[1.02] contrast-[1.03] brightness-[1.01]"
+                    loading="eager"
+                  />
+                )}
               </motion.div>
 
               {/* Floating Dark Charcoal Availability Card overlaid on lower right */}
@@ -205,3 +372,4 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
     </motion.section>
   );
 };
+
