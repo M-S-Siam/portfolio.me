@@ -23,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ onStartProject }) => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Work', href: '#projects' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Experience', href: '#experience' },
     { name: 'Notes', href: '#articles' },
     { name: 'Contact', href: '#contact' },
