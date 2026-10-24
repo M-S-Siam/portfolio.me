@@ -253,7 +253,7 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                 {heroStats.map((stat, idx) => (
                   <div key={idx} className="flex flex-col group">
                     <span className="font-editorial text-3xl sm:text-4xl text-[#151515] leading-none mb-1.5 font-normal tracking-tight group-hover:text-black transition-colors">
-                      <AnimatedCounter value={stat.value} duration={1400 + idx * 200} />
+                      <AnimatedCounter value={stat.value} duration={stat.value.includes('2+') ? 200 : 700 + idx * 100} />
                     </span>
                     <span className="text-[12px] sm:text-[13px] text-[#71717A] leading-tight font-normal">
                       {stat.label}
