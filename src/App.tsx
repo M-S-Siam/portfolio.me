@@ -17,6 +17,19 @@ import { Project } from './types/portfolio';
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
+  useEffect(() => {
+    // Disable automatic browser scroll restoration so refresh always starts at top (Home)
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    // Clear any lingering hash that forces browser to scroll down to sections like #experience
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+    // Always start at top of page
+    window.scrollTo(0, 0);
+  }, []);
+
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {

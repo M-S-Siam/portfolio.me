@@ -23,7 +23,6 @@ export const Header: React.FC<HeaderProps> = ({ onStartProject }) => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Work', href: '#projects' },
-    { name: 'Gallery', href: '#gallery' },
     { name: 'Experience', href: '#experience' },
     { name: 'Notes', href: '#articles' },
     { name: 'Contact', href: '#contact' },
@@ -34,9 +33,6 @@ export const Header: React.FC<HeaderProps> = ({ onStartProject }) => {
     setMobileMenuOpen(false);
     if (href === '#home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (window.location.hash) {
-        history.replaceState(null, '', window.location.pathname);
-      }
       return;
     }
     const target = document.querySelector(href);
@@ -48,9 +44,6 @@ export const Header: React.FC<HeaderProps> = ({ onStartProject }) => {
         top: offsetPosition,
         behavior: 'smooth',
       });
-      if (window.location.hash !== href) {
-        history.replaceState(null, '', href);
-      }
     }
   };
 
