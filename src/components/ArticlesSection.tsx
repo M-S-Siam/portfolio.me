@@ -69,11 +69,11 @@ export const ArticlesSection: React.FC = () => {
                   <span>{article.readTime}</span>
                 </div>
 
-                <h3 className="font-editorial text-2xl text-zinc-950 tracking-tight leading-snug group-hover:text-black mb-2 transition-colors">
+                <h3 className="font-editorial text-2xl text-zinc-950 tracking-tight leading-snug group-hover:text-black mb-2 transition-colors min-h-[3.6rem] flex items-start">
                   {article.title}
                 </h3>
 
-                <p className="text-zinc-600 text-sm leading-relaxed line-clamp-3 mb-6">
+                <p className="text-zinc-600 text-sm leading-relaxed line-clamp-3 mb-6 min-h-[4rem]">
                   {article.excerpt}
                 </p>
               </div>

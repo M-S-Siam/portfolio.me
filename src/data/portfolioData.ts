@@ -54,7 +54,7 @@ export const projects: Project[] = [
     year: '2025',
     role: 'Digital Strategist & Media Buyer',
     summary:
-      'An integrated marketing approach combining paid advertising, brand photography, and digital content to showcase jewelry collections and strengthen the brand’s online presence.',
+      'An integrated marketing approach combining paid ads, brand photography, and digital content to showcase jewelry collections and strengthen online presence.',
     image: '/roselle_jewelry_campaign.jpg',
     gallery: [
       '/roselle_jewelry_campaign.jpg',
@@ -166,12 +166,12 @@ export const projects: Project[] = [
   {
     id: 'quantrex',
     title: 'Quantrex — Agency Finance & Client-Ledger Web App',
-    client: 'Marketing Agency SaaS Tool',
+    client: 'Agency SaaS Tool',
     category: 'Web Apps & Tools',
     year: '2026',
     role: 'Product Concept, UI Design & Full-Stack Development',
     summary:
-      'A custom web application designed to help digital marketing agencies organise client ledgers, track advertising expenses across currencies, and manage financial records in one place.',
+      'A custom web app built for marketing agencies to track client ledgers, manage ad spend across currencies, and maintain clean financial records.',
     image: '/quantrex_dashboard.png',
     gallery: [
       '/quantrex_dashboard.png',
@@ -195,13 +195,13 @@ export const projects: Project[] = [
   },
   {
     id: 'creative-production-suite',
-    title: 'Cinematography & Visual Production',
+    title: 'Brand Films — Cinematography & Visual Production',
     client: 'Multiple Client Brands',
     category: 'Cinematography',
     year: '2024 – 2026',
     role: 'Director of Photography & Post-Production Editor',
     summary:
-      'From creative planning and camera operation to lighting, sound, and editing, each production is approached with a focus on visual storytelling and brand communication.',
+      'From creative concept to camera operation, lighting, and color grading, each production is crafted with a focus on visual storytelling.',
     image: '/cinematography_gimbal_shot2.jpg',
     gallery: [
       '/cinematography_gimbal_shot2.jpg',

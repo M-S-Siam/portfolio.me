@@ -138,7 +138,7 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
                 exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.2 } }}
                 whileHover={{ y: -6 }}
                 onClick={() => onSelectProject(project)}
-                className="group cursor-pointer flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 rounded-2xl"
+                className="group cursor-pointer flex flex-col h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 rounded-2xl"
                 tabIndex={0}
                 data-cursor="project"
                 onKeyDown={(e) => {
@@ -150,7 +150,7 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
                 aria-label={`View campaign: ${project.title}`}
               >
                 {/* Image Container with Restrained Zoom */}
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#ECEEEF] border border-zinc-200/90 mb-5 shadow-2xs group-hover:shadow-md transition-shadow duration-300">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#ECEEEF] border border-zinc-200/90 mb-5 shadow-2xs group-hover:shadow-md transition-shadow duration-300 shrink-0">
                   <motion.img
                     src={getAssetUrl(project.image)}
                     alt={project.title}
@@ -165,9 +165,9 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
                   </div>
                 </div>
 
-                {/* Editorial Typography & Metadata */}
-                <div>
-                  <div className="flex items-center gap-2 text-xs text-zinc-500 font-medium mb-1.5">
+                {/* Editorial Typography & Metadata with strict grid baseline alignment */}
+                <div className="flex flex-col flex-1">
+                  <div className="flex items-center gap-2 text-xs text-zinc-500 font-medium mb-2 min-h-[1.25rem] truncate">
                     <span>{project.client}</span>
                     <span aria-hidden="true">·</span>
                     <span>{project.category}</span>
@@ -175,14 +175,14 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
                     <span>{project.year}</span>
                   </div>
 
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="font-editorial text-2xl sm:text-3xl text-zinc-950 tracking-tight group-hover:text-black transition-colors">
+                  <div className="flex items-start justify-between gap-2 min-h-[3.6rem] sm:min-h-[4.2rem]">
+                    <h3 className="font-editorial text-2xl sm:text-3xl text-zinc-950 tracking-tight leading-[1.12] group-hover:text-black transition-colors">
                       {project.title}
                     </h3>
-                    <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+                    <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
                   </div>
 
-                  <p className="text-zinc-600 text-sm leading-relaxed mt-2">
+                  <p className="text-zinc-600 text-sm leading-relaxed mt-2.5 min-h-[4rem] sm:min-h-[4.25rem] line-clamp-3">
                     {project.summary}
                   </p>
                 </div>
