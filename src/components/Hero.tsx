@@ -96,9 +96,16 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && saved.startsWith('data:image/') && portraitSrc !== saved) {
       setPortraitSrc(saved);
-    } else {
-      setImageMissingOnDisk(true);
+      return;
     }
+
+    const altSuitUrl = getAssetUrl('/siam_suit_portrait.jpg');
+    if (portraitSrc !== altSuitUrl) {
+      setPortraitSrc(altSuitUrl);
+      return;
+    }
+
+    setImageMissingOnDisk(true);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,19 +159,19 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
   return (
     <motion.section
       id="home"
-      initial={{ opacity: 0, y: 36 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.15 }}
-      transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full pt-2 pb-12 sm:pb-16 overflow-hidden"
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="w-full pt-2 pb-12 sm:pb-16 overflow-hidden scroll-mt-24 sm:scroll-mt-32"
     >
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Rounded Hero Box matching reference design */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
+          initial={{ opacity: 0, scale: 0.99 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
           className="relative w-full rounded-[28px] sm:rounded-[36px] bg-[#ECEDEF] border border-[#E0E2E6] overflow-hidden shadow-xs"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] lg:min-h-[620px] items-stretch">
@@ -177,8 +184,8 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                     <motion.span
                       initial={{ y: '100%', opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
-                      viewport={{ once: false }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
                       className="text-[#151515] block font-normal"
                     >
                       Scale Brands
@@ -188,8 +195,8 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                     <motion.span
                       initial={{ y: '100%', opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
-                      viewport={{ once: false }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.28 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                       className="text-[#8E8E93] block font-normal"
                     >
                       Beyond Limits
@@ -199,10 +206,10 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
 
                 {/* Subtitle / Intro based on CV */}
                 <motion.p
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.6, delay: 0.35, ease: 'easeOut' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: 0.25, ease: 'easeOut' }}
                   className="text-[#71717A] text-[16px] sm:text-[18px] leading-relaxed max-w-[480px] mb-8 font-normal"
                 >
                   I work at the intersection of digital marketing and creative production, helping brands build a stronger online presence through strategic campaigns, social media, and visual storytelling. My approach combines creative thinking with a practical understanding of what works.
@@ -210,10 +217,10 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
 
                 {/* Action Buttons with Interactive Springs */}
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 0.6, delay: 0.45, ease: 'easeOut' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: 0.32, ease: 'easeOut' }}
                   className="flex flex-wrap items-center gap-3.5 mb-10 sm:mb-14"
                 >
                   <motion.a
@@ -237,10 +244,10 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
 
               {/* Three Aligned Statistics with Animated Counters from CV */}
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.6, delay: 0.55, ease: 'easeOut' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.38, ease: 'easeOut' }}
                 className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 border-t border-zinc-300/60 max-w-[500px]"
               >
                 {heroStats.map((stat, idx) => (
@@ -297,11 +304,11 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
 
               {/* Character Portrait */}
               <motion.div
-                initial={{ scale: 1.08, opacity: 0 }}
+                initial={{ scale: 1.05, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="w-full h-full flex items-end justify-center overflow-hidden"
+                viewport={{ once: true }}
+                transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                className="w-full h-full flex items-end justify-center overflow-hidden transform-gpu will-change-transform"
               >
                 {imageMissingOnDisk ? (
                   <div
@@ -324,8 +331,8 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                     src={portraitSrc}
                     onError={handleImageError}
                     referrerPolicy="no-referrer"
-                    alt={`${portfolioConfig.fullName} — Digital Marketing Specialist & Cinematographer`}
-                    className="w-full h-full min-h-[440px] lg:min-h-[620px] object-cover object-top select-none pointer-events-none transition-all duration-700 ease-out hover:scale-[1.02] contrast-[1.03] brightness-[1.01]"
+                    alt={`${portfolioConfig.fullName} — Digital Marketer • Founder & Creator`}
+                    className="w-full h-full min-h-[440px] lg:min-h-[620px] object-cover object-top select-none pointer-events-none transition-transform duration-700 ease-out hover:scale-[1.02] contrast-[1.03] brightness-[1.01]"
                     loading="eager"
                   />
                 )}
@@ -333,12 +340,30 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
 
               {/* Floating Dark Charcoal Availability Card overlaid on lower right */}
               <motion.div
-                initial={{ opacity: 0, y: 35, scale: 0.94 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -5, scale: 1.015 }}
-                className="absolute bottom-5 sm:bottom-7 right-4 sm:right-7 left-4 sm:left-auto z-20 max-w-[360px] bg-[#242426]/95 backdrop-blur-md text-white rounded-[22px] p-5 shadow-[0_20px_40px_rgba(0,0,0,0.35)] border border-white/10 transition-all duration-300 hover:border-white/20 group"
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    y: 30,
+                    transition: {
+                      duration: 0.35,
+                      ease: [0.4, 0, 0.2, 1],
+                    },
+                  },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.6,
+                      delay: 0.08,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.15 }}
+                whileHover={{ y: -4, transition: { duration: 0.2, ease: 'easeOut' } }}
+                className="absolute bottom-5 sm:bottom-7 right-4 sm:right-7 left-4 sm:left-auto z-20 max-w-[360px] bg-[#242426]/95 backdrop-blur-md text-white rounded-[22px] p-5 shadow-[0_20px_40px_rgba(0,0,0,0.35)] border border-white/10 hover:border-white/20 transition-colors duration-200 transform-gpu will-change-transform group"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex-1 min-w-0 pr-1">
@@ -356,8 +381,8 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
                   {/* White Square Action Button with Arrow */}
                   <motion.button
                     onClick={onSelectProjectClick}
-                    whileHover={{ scale: 1.12, rotate: 12 }}
-                    whileTap={{ scale: 0.92 }}
+                    whileHover={{ scale: 1.1, rotate: 10 }}
+                    whileTap={{ scale: 0.94 }}
                     className="shrink-0 w-11 h-11 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 flex items-center justify-center shadow-sm transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                     aria-label="Inquire about project availability"
                   >
@@ -372,4 +397,5 @@ export const Hero: React.FC<HeroProps> = ({ onSelectProjectClick }) => {
     </motion.section>
   );
 };
+
 

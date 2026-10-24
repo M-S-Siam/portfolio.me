@@ -4,14 +4,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { capabilities, portfolioConfig } from '../data/portfolioData';
 
 export const AboutSection: React.FC = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const toggleCapability = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   return (
-    <section id="about" className="w-full py-16 sm:py-24 border-t border-zinc-200/60 overflow-hidden">
+    <section id="about" className="w-full py-16 sm:py-24 overflow-hidden scroll-mt-24 sm:scroll-mt-28">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
         {/* Section Header Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-16 sm:mb-20">

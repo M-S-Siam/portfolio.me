@@ -13,7 +13,8 @@ import {
 export const portfolioConfig = {
   brandName: 'Md. Shahariar Siam',
   fullName: 'Md. Shahariar Siam',
-  title: 'Digital Marketing Specialist & Creative Producer',
+  title: 'Digital Marketer • Founder & Creator',
+  roleSubtitle: 'Digital Marketer • Founder & Creator',
   tagline: 'Performance Marketing • Social Media Growth • Content & Video Production',
   email: 'mdshahariar307@gmail.com',
   phone: '+880 1874-887309',

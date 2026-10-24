@@ -76,9 +76,14 @@ export const Footer: React.FC = () => {
                   />
                 </svg>
               </div>
-              <span className="font-semibold text-xl tracking-tight text-white">
-                {portfolioConfig.fullName}
-              </span>
+              <div className="flex flex-col">
+                <span className="font-semibold text-xl tracking-tight text-white leading-tight">
+                  {portfolioConfig.fullName}
+                </span>
+                <span className="text-xs text-zinc-400 font-medium tracking-tight mt-0.5">
+                  Digital Marketer • Founder &amp; Creator
+                </span>
+              </div>
             </div>
             <p className="text-zinc-400 text-sm leading-relaxed">
               {portfolioConfig.tagline}. Based in Dhaka, Bangladesh · Open to global remote teams.
@@ -91,6 +96,15 @@ export const Footer: React.FC = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href === '#home') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (window.location.hash) {
+                      history.replaceState(null, '', window.location.pathname);
+                    }
+                  }
+                }}
                 whileHover={{ y: -1 }}
                 className="text-sm text-zinc-400 hover:text-white transition-colors"
               >

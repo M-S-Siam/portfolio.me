@@ -20,6 +20,13 @@
   --text-secondary: #77777A;
   --text-muted: #A0A0A3;
   --border-subtle: #E1E1E3;
+  background-color: #F7F7F6;
+}
+
+html {
+  background-color: #F7F7F6;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -29,6 +36,12 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+
+:target {
+  outline: none !important;
 }
 
 /* Editorial serif utility */

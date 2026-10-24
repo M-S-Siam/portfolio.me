@@ -9,7 +9,7 @@ export const ArticlesSection: React.FC = () => {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   return (
-    <section id="articles" className="w-full py-16 sm:py-24 border-b border-zinc-200/60 overflow-hidden">
+    <section id="articles" className="w-full py-16 sm:py-24 border-b border-zinc-200/60 overflow-hidden scroll-mt-24 sm:scroll-mt-28">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

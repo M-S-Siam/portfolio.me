@@ -31,18 +31,34 @@ export const Header: React.FC<HeaderProps> = ({ onStartProject }) => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    if (href === '#home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname);
+      }
+      return;
+    }
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = (target as HTMLElement).getBoundingClientRect().top;
+      const offsetPosition = Math.max(0, elementPosition + window.pageYOffset - headerOffset);
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+      if (window.location.hash !== href) {
+        history.replaceState(null, '', href);
+      }
     }
   };
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-40 w-full transition-colors duration-200 py-5 ${
         scrolled
-          ? 'bg-[#F7F7F6]/90 backdrop-blur-md py-4 border-b border-zinc-200/60 shadow-xs'
-          : 'bg-transparent py-6'
+          ? 'bg-[#F7F7F6]/90 backdrop-blur-md'
+          : 'bg-[#F7F7F6]'
       }`}
     >
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 flex items-center justify-between">
@@ -73,11 +89,11 @@ export const Header: React.FC<HeaderProps> = ({ onStartProject }) => {
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-900 group-hover:text-black transition-colors leading-none">
+            <span className="font-semibold text-base sm:text-lg lg:text-xl tracking-tight text-zinc-900 group-hover:text-black transition-colors leading-tight">
               {portfolioConfig.brandName}
             </span>
-            <span className="text-[10px] text-zinc-400 font-medium tracking-wider uppercase mt-0.5 hidden sm:inline">
-              Growth & Creative
+            <span className="text-[10.5px] sm:text-xs text-zinc-500 font-medium tracking-tight mt-0.5">
+              Digital Marketer • Founder &amp; Creator
             </span>
           </div>
         </motion.a>

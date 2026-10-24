@@ -16,7 +16,17 @@ function suitPortraitSyncPlugin(): Plugin {
         fs.unlinkSync(oldPortraitPath);
       }
 
+      const altSuitPath = path.resolve(publicDir, 'siam_suit_portrait.jpg');
+
       if (fs.existsSync(suitPortraitPath) && fs.statSync(suitPortraitPath).size > 1000) {
+        if (!fs.existsSync(altSuitPath) || fs.statSync(altSuitPath).size === 0) {
+          fs.copyFileSync(suitPortraitPath, altSuitPath);
+        }
+        return true;
+      }
+
+      if (fs.existsSync(altSuitPath) && fs.statSync(altSuitPath).size > 1000) {
+        fs.copyFileSync(altSuitPath, suitPortraitPath);
         return true;
       }
 
@@ -30,13 +40,14 @@ function suitPortraitSyncPlugin(): Plugin {
         );
         if (match) {
           fs.copyFileSync(path.join(assetsDir, match), suitPortraitPath);
+          fs.copyFileSync(path.join(assetsDir, match), altSuitPath);
           return true;
         }
       }
     } catch {
       // Ignore fs errors in restricted environments
     }
-    return fs.existsSync(suitPortraitPath);
+    return fs.existsSync(suitPortraitPath) || fs.existsSync(path.resolve(publicDir, 'siam_suit_portrait.jpg'));
   };
 
   return {

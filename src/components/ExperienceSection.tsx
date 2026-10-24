@@ -4,7 +4,7 @@ import { experiences, educationList, certificationsList, languages } from '../da
 
 export const ExperienceSection: React.FC = () => {
   return (
-    <section id="experience" className="w-full py-16 sm:py-24 border-b border-zinc-200/60 overflow-hidden">
+    <section id="experience" className="w-full py-16 sm:py-24 border-b border-zinc-200/60 overflow-hidden scroll-mt-24 sm:scroll-mt-28">
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           {/* Left Title & Education / Certifications Card */}

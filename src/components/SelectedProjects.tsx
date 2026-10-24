@@ -61,7 +61,7 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.12 }}
       transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full py-16 sm:py-24"
+      className="w-full py-16 sm:py-24 scroll-mt-24 sm:scroll-mt-28"
     >
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
         {/* Section Header */}
@@ -70,9 +70,9 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16"
+          className="flex flex-col gap-6 sm:gap-7 mb-10 sm:mb-14"
         >
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <span className="text-xs font-semibold uppercase tracking-widest text-zinc-400 block mb-2">
               Portfolio &amp; Case Studies
             </span>
@@ -84,13 +84,13 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
             </p>
           </div>
 
-          {/* Interactive Category Filter Tabs with Sliding Indicator */}
+          {/* Interactive Category Filter Tabs with Sliding Indicator (Directly below description) */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap items-center gap-1.5 p-1.5 bg-[#ECEDEF] rounded-2xl border border-zinc-200/80 self-start md:self-auto relative"
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex flex-wrap items-center gap-1.5 p-1.5 bg-[#ECEDEF] rounded-2xl border border-zinc-200/80 self-start relative max-w-full overflow-x-auto"
             role="tablist"
             aria-label="Filter campaigns by category"
           >
@@ -102,8 +102,8 @@ export const SelectedProjects: React.FC<SelectedProjectsProps> = ({ onSelectProj
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveCategory(cat)}
-                  className={`relative text-xs sm:text-[13px] font-medium px-3.5 py-1.5 rounded-xl transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 z-10 ${
-                    isActive ? 'text-zinc-950' : 'text-zinc-600 hover:text-zinc-900'
+                  className={`relative text-xs sm:text-[13px] font-medium px-4 py-2 rounded-xl transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 z-10 shrink-0 ${
+                    isActive ? 'text-zinc-950 font-semibold' : 'text-zinc-600 hover:text-zinc-900'
                   }`}
                 >
                   {isActive && (

@@ -77,7 +77,7 @@ export const ContactSection: React.FC = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.15 }}
       transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full py-16 sm:py-24 bg-[#ECEDEF]/40 border-t border-zinc-200/80 overflow-hidden"
+      className="w-full py-16 sm:py-24 bg-[#ECEDEF]/40 border-t border-zinc-200/80 overflow-hidden scroll-mt-24 sm:scroll-mt-28"
     >
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

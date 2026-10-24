@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ClientStrip } from './components/ClientStrip';
 import { SelectedProjects } from './components/SelectedProjects';
+import { CampaignSnapshots } from './components/CampaignSnapshots';
 import { ProjectModal } from './components/ProjectModal';
 import { AboutSection } from './components/AboutSection';
 import { ProcessSection } from './components/ProcessSection';
@@ -38,6 +39,9 @@ export default function App() {
 
         {/* Selected Portfolio Projects */}
         <SelectedProjects onSelectProject={(project) => setSelectedProject(project)} />
+
+        {/* Campaign Snapshots / Casual Meta Business Suite Captures */}
+        <CampaignSnapshots />
 
         {/* About & Philosophy */}
         <AboutSection />
